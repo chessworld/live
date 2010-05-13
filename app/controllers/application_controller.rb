@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
+  
+  before_filter :mailer_set_url_options
 
   private
     def current_user_session
@@ -22,7 +24,7 @@ class ApplicationController < ActionController::Base
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        # flash[:notice] = "You must be logged in to access this page"
         redirect_to sign_in_path
         return false
       end
@@ -31,7 +33,7 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
+        # flash[:notice] = "You must be logged out to access this page"
         redirect_to root_path
         return false
       end
@@ -44,5 +46,9 @@ class ApplicationController < ActionController::Base
     def redirect_back_or_default(default)
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
+    end
+    
+    def mailer_set_url_options
+      ActionMailer::Base.default_url_options[:host] = request.host_with_port
     end
 end

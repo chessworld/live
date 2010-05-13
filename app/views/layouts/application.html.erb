@@ -6,6 +6,13 @@
 </head>
 <body>
     <h1>Chess Kids Live</h1>
+    <% if flash.count > 0 %>
+      <ul>
+      <% flash.each do |key, message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    <% end %>
     <% if current_user %>
       <p>
         Signed in as <%= current_user.login %>.
