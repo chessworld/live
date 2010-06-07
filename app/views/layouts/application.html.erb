@@ -3,21 +3,33 @@
     <title>Chess Kids Live</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%= javascript_include_tag 'swfobject' %>
+    <%= stylesheet_link_tag 'style' %>
 </head>
 <body>
-    <h1>Chess Kids Live</h1>
-    <% if flash.count > 0 %>
-      <ul>
-      <% flash.each do |key, message| %>
-        <li><%= message %></li>
+  <div class="wrapper">
+    <h1><%= link_to 'Chess Kids Live', root_path %></h1>
+    <div class="login">
+      <% if current_user %>
+          Signed in as <%= current_user.login %>.
+          <%= link_to 'Sign Out', sign_out_path %>
       <% end %>
-      </ul>
-    <% end %>
-    <% if current_user %>
-      <p>
-        Signed in as <%= current_user.login %>.
-        <%= link_to 'Sign Out', sign_out_path %>
-      </p>
-    <% end %>
-    <%= yield %>
+    </div>  
+    <div class="main">
+      <% if flash.count > 0 %>
+        <ul>
+        <% flash.each do |key, message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>    
+      <%= yield %>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="wrapper">
+      <a href="http://www.chesskids.com.au/">
+        Online play brought to you by Chess Kids &mdash; 1300-4-CHESS
+      </a>
+    </div>
+  </div>
 </body>

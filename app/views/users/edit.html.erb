@@ -1,14 +1,16 @@
-<h2>Edit My Account</h2>
+<div class="content">
+  <h2>Edit My Account</h2>
 
-<% form_for @user, :url => account_path do |f| %>
+  <% form_for @user, :url => account_path do |f| %>
+    <p>
+      <%= f.error_messages %>
+    </p>
+    <%= render :partial => "form", :object => f %>
+    <p>
+      <%= f.submit "Update" %>
+    </p>
+  <% end %>
   <p>
-    <%= f.error_messages %>
+  <%= link_to "My Profile", account_path %>
   </p>
-  <%= render :partial => "form", :object => f %>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
-<p>
-<%= link_to "My Profile", account_path %>
-</p>
+</div>
