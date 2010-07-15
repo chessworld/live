@@ -4,7 +4,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resource :account, :controller => :users
   map.resources :users,
-    :collection => { :request_password_reset  => [:get, :post] },
+    :collection => { 
+      :request_password_reset   => [:get, :post],
+      :resend_activation        => :get
+    },
     :member     => { :reset_password          => [:get, :put] }
+  map.activate '/activate/:activation_code', :controller => 'activations', :action => 'create'
   map.root :controller => 'mychess', :action => 'play'
 end

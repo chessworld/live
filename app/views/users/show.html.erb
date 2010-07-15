@@ -1,11 +1,15 @@
-<p>
-  <b>Login:</b>
-  <%=h @user.login %>
-</p>
+<div class="content">
+  
+  <p>
+    <b>Login:</b>
+    <%=h @user.login %>
+  </p>
 
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
+  <p>
+    <b>Email:</b>
+    <%=h @user.email %>
+  </p>
 
-<%= link_to 'Edit', edit_account_path %>
+  <%= link_to 'Play Chess Now', root_path %>
+
+</div>

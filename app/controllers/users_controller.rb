@@ -8,9 +8,14 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_back_or_default root_path
+
+    # Saving without session maintenance to skip
+    # auto-login which can't happen here because
+    # the User has not yet been activated
+    if @user.save_without_session_maintenance
+      @user.deliver_activation_instructions!
+      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+      redirect_to root_url
     else
       render :action => :new
     end
@@ -31,6 +36,17 @@ class UsersController < ApplicationController
       redirect_to account_url
     else
       render :action => :edit
+    end
+  end
+
+  def resend_activation
+    if params[:login]
+      @user = User.find_by_login params[:login]
+      if @user && !@user.active?
+        @user.deliver_activation_instructions!
+        flash[:notice] = "Please check your e-mail for your account activation instructions!"
+        redirect_to root_path
+      end
     end
   end
   

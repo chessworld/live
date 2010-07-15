@@ -16,11 +16,11 @@
     </div>  
     <div class="main">
       <% if flash.count > 0 %>
-        <ul>
+        <div class="content">
         <% flash.each do |key, message| %>
-          <li><%= message %></li>
+          <p><%= message %></p>
         <% end %>
-        </ul>
+        </div>
       <% end %>    
       <%= yield %>
     </div>
