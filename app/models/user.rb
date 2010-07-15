@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     c.validate_email_field = false
   end
   
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :login, :email, :password, :password_confirmation, :chat_enabled
   
   validates_length_of :email, :within => 6..100
   validates_format_of :email, :with => Authlogic::Regex.email,

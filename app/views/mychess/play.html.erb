@@ -1,4 +1,10 @@
 <% version = 1.1 %>
+<% 
+  url = '/flash/MyChessSite.swf?user=' + h(current_user.login) + '&amp;version=' + version.to_s
+  unless current_user.chat_enabled?
+    url += '&amp;chat=off'
+  end
+%>
 <script type="text/javascript">
 
 	swfobject.registerObject("myChessId", "9.0.0", "/flash/expressInstall.swf");
@@ -23,10 +29,10 @@
 <center>
 <div>
 	<object id="myChessId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="1080" height="600">
-		<param name="movie" value="/flash/MyChessSite.swf?user=<%=h current_user.login %>&amp;version=<%= version %>" />
+		<param name="movie" value="<%= url %>" />
 		<param name="wmode" value="opaque" />
     		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="/flash/MyChessSite.swf?user=<%=h current_user.login %>&amp;version=<%= version %>" width="1080" height="600">
+		<object type="application/x-shockwave-flash" data="<%= url %>" width="1080" height="600">
 		<!--<![endif]-->
 		<div>
 			<h1>Alternative content</h1>

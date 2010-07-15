@@ -11,6 +11,7 @@
     <div class="login">
       <% if current_user %>
           Signed in as <%= current_user.login %>.
+          <%= link_to 'Settings', edit_account_path %>,
           <%= link_to 'Sign Out', sign_out_path %>
       <% end %>
     </div>  
