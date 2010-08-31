@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => Authlogic::Regex.email,
     :message => I18n.t('error_messages.email_invalid', :default => 'should look like an email address.')
     
+  validates_length_of :login, :within => 3..20
+    
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
     UserMailer.deliver_password_reset_instructions self
