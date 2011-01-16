@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   end
   
   attr_accessible :login, :email, :password, :password_confirmation, :chat_enabled
+  attr_readonly :login
   
   validates_length_of :email, :within => 6..100
   validates_format_of :email, :with => Authlogic::Regex.email,
