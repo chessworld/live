@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create, :request_password_reset, :reset_password]
   before_filter :require_user, :only => [:show, :edit, :update]
+  before_filter :require_admin, :only => [:index]
+  
+  def index
+    @users = User.all
+  end
   
   def new
     @user = User.new
@@ -78,4 +83,9 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  private
+    def require_admin
+      head 403 unless current_user && current_user.admin?
+    end
 end

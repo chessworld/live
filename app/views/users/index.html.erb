@@ -1,0 +1,27 @@
+<div class="content">
+  <h2>Users</h2>
+  <table width="100%" border="1">
+    <thead>
+      <tr>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Created</th>
+        <th>Active</th>
+        <th>Chat</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%=h user.login %></td>
+          <td><%=h user.email %></td>
+          <td><%=h user.created_at %></td>
+          <td><%=h user.active? ? 'Yes' : 'No' %></td>
+          <td><%=h user.chat_enabled? ? 'Yes' : 'No' %></td>
+          <td><%=h user.admin? ? 'Yes' : 'No' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
