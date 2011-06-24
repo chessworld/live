@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
   validates_length_of :email, :within => 6..100
   validates_format_of :email, :with => Authlogic::Regex.email,
     :message => I18n.t('error_messages.email_invalid', :default => 'should look like an email address.')
+  
+  validates_each :email, do |record, attr, value|
+    unless User.scoped(conditions: {email: value}).count < 2
+      record.errors.add attr, 'cannot be used more than twice'
+    end
+  end
     
   validates_length_of :login, :within => 3..20
     
