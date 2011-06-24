@@ -27,18 +27,22 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    @user = User.find_by_id(params[:id])
+    raise "Access Denied" unless current_user.admin? || current_user == @user
   end
 
   def edit
-    @user = @current_user
+    @user = User.find_by_id(params[:id])
+    raise "Access Denied" unless current_user.admin? || current_user == @user
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = User.find_by_id(params[:id])
+    raise "Access Denied" unless current_user.admin? || current_user == @user
+    params[:user].remove :suspend_until if params[:user] && !current_user.admin?
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
-      redirect_to account_url
+      redirect_to user_url(@user)
     else
       render :action => :edit
     end

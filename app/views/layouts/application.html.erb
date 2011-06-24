@@ -14,7 +14,7 @@
           <% if current_user.admin %>
             <%= link_to 'Users', users_path %>,
           <% end %>
-          <%= link_to 'Settings', edit_account_path %>,
+          <%= link_to 'Settings', edit_user_path(@current_user) %>,
           <%= link_to 'Sign Out', sign_out_path %>
       <% end %>
     </div>  

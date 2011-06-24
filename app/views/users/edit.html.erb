@@ -1,7 +1,7 @@
 <div class="content">
-  <h2>Edit My Account</h2>
+  <h2>Editing <%=h @user.login %></h2>
 
-  <% form_for @user, :url => account_path do |f| %>
+  <% form_for @user, :url => user_path(@user) do |f| %>
     <p>
       <%= f.error_messages %>
     </p>
@@ -11,6 +11,6 @@
     </p>
   <% end %>
   <p>
-  <%= link_to "My Profile", account_path %>
+  <%= link_to "Play Chess Now", root_path %>
   </p>
 </div>

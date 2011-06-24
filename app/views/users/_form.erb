@@ -19,3 +19,7 @@
 <p>
 <%= form.check_box :chat_enabled %> <%= form.label :chat_enabled, 'Allow user to talk in chat room' %>
 </p>
+<% if current_user.admin? %>
+    <%= form.label :suspend_until %>
+    <%= form.text_field :suspend_until %>
+<% end %>
