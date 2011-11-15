@@ -1,10 +1,8 @@
 class ActivationsController < ApplicationController
   before_filter :require_no_user
+  before_filter :find_user
 
   def create
-    @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
-    raise Exception if @user.active?
-
     if @user.activate!
       flash[:notice] = "Your account has been activated!"
       UserSession.create(@user, false) # Log user in manually
@@ -13,6 +11,12 @@ class ActivationsController < ApplicationController
     else
       render :action => :new
     end
+  end
+
+  def find_user
+    @user = User.find_using_perishable_token(params[:activation_code], 1.week)
+    redirect_to root_url, :notice => "Sorry, this activation code has expired." unless @user
+    redirect_to root_url, :notice => "This account is already activated, please log in to continue." if @user && @user.active?
   end
 
 end
