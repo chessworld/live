@@ -55,6 +55,8 @@ class UsersController < ApplicationController
         @user.deliver_activation_instructions!
         flash[:notice] = "Please check your e-mail for your account activation instructions!"
         redirect_to root_path
+      else
+        flash[:notice] = "Sorry, this login is not registered."
       end
     end
   end

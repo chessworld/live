@@ -15,7 +15,7 @@ class ActivationsController < ApplicationController
 
   def find_user
     @user = User.find_using_perishable_token(params[:activation_code], 1.week)
-    redirect_to root_url, :notice => "Sorry, this activation code has expired." unless @user
+    redirect_to root_url, :notice => "Sorry, your activation link is incorrect, or has expired. <a href='/users/resend_activation'>Click here to request a new activation link.</a>" unless @user
     redirect_to root_url, :notice => "This account is already activated, please log in to continue." if @user && @user.active?
   end
 

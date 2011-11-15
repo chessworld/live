@@ -1,0 +1,8 @@
+<div class="content">
+<h3>Resend Activation</h3>
+<% form_tag resend_activation_users_path, method: :get do %>
+  <%= label_tag :login, "Your login: " %>
+  <%= text_field_tag :login, params[:login] %>
+  <%= submit_tag "Resend my activation link" %>
+<% end %>
+</div>
