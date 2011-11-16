@@ -69,6 +69,8 @@ class UsersController < ApplicationController
         flash[:notice] = "Instructions to reset your password have been emailed to you. " +  
         "Please check your email."  
         redirect_to root_path
+      else
+        flash[:notice] = "Sorry, this login is not registered."
       end
     end
   end
