@@ -7,4 +7,5 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
+  config.action_mailer.delivery_method = :smtp
 end
