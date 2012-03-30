@@ -1,6 +1,6 @@
 <% version = 2.2 %>
 <% 
-  url = '/flash/MyChessSite.swf?user=' + h(current_user.login) + '&amp;version=' + version.to_s
+  url = '/flash/MyChessSite.swf?user=' + h(current_user.login) + '&amp;version=' + version.to_s + '&amp;z=' + $revision
   unless current_user.chat_enabled?
     url += '&amp;chat=off'
   end
